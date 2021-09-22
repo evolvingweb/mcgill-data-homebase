@@ -1,5 +1,10 @@
 import _merge from 'lodash.merge';
 
+export const COLORS = {
+  blackOlive: '#3F3F37',
+  darkGray: '#6E7777',
+};
+
 export const FONT_FAMILY = "'Inter', sans-serif";
 
 export const DEFAULT_OPTIONS = {
@@ -11,6 +16,14 @@ export const DEFAULT_OPTIONS = {
       grid: {
         display: false,
       },
+      ticks: {
+        color: COLORS.blackOlive,
+        font: {
+          family: FONT_FAMILY,
+          size: 14,
+          weight: 600,
+        },
+      },
     },
     x: {
       grid:{
@@ -20,8 +33,8 @@ export const DEFAULT_OPTIONS = {
         borderColor: 'black',
       },
       ticks: {
-        color: '#3F3F37',
         stepSize: 10000,
+        color: COLORS.darkGray,
         font: {
           family: FONT_FAMILY,
           size: 12,
