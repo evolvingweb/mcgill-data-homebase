@@ -1,63 +1,16 @@
 import { Bar } from 'react-chartjs-2';
+import _merge from 'lodash.merge';
 
-export const DEFAULT_GRADIENT_COLORS = [
-    '#377B65',
-    '#3F3F37',
-];
-
-const data = {
-  labels: ['Design 1'],
-  datasets: [
-    {
-      data: [25000],
-      backgroundColor: '#377B65',
-      barPercentage: .2,
-      categoryPercentage: .2,
-    }
-  ],
-};
-
-const options = {
-  indexAxis: 'y',
-  barThickness: 40,
-  maintainAspectRatio: false,
-  scales: {
-    y:{
-      grid: {
-        display: false,
-      },
-    },
-    x: {
-      grid:{
-        borderDash: [2,3],
-        color: '#D9DEDD',
-        borderWidth: 2,
-        borderColor: 'black',
-      },
-      ticks: {
-        color: '#3F3F37',
-        stepSize: 10000,
-        callback: (value) => {
-          if (!value) {
-            return `0 KgCO2eq`;
-          }
-
-          return `${value / 1000}K`
-        }
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  },
-};
+import {
+  DEFAULT_DATA,
+  OPTIONS,
+  DEFAULT_GRADIENT_COLORS,
+} from './config/summary.config'
 
 const Summary = ({
+  data,
+  width = 940,
+  height = 200,
   gradientColors = DEFAULT_GRADIENT_COLORS,
 }) => {
 
@@ -79,16 +32,21 @@ const Summary = ({
         return dataItem;
       });
 
-      return {
-        ...data,
-        datasets: newDataSets,
-      };
+      return _merge(
+        DEFAULT_DATA,
+        {
+            datasets: newDataSets,
+        }
+      );
     }
 
     return data;
   };
+
   return (
-      <Bar data={parsedData} options={options} />
+      <section className="chart-container" style={ { width, height } }>
+        <Bar data={parsedData} options={OPTIONS} />
+      </section>
   );
 };
 
