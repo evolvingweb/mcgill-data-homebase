@@ -33,7 +33,9 @@ const Summary = ({
       });
 
       return _merge(
+        {},
         DEFAULT_DATA,
+        data,
         {
             datasets: newDataSets,
         }

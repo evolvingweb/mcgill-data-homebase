@@ -1,6 +1,10 @@
 .App {
- max-width: 1160px;
-  margin: auto;
+ max-width: 940px;
+ margin: auto;
+
+  > section {
+    margin-bottom: 3rem;
+  }
 }
 
 .chart-container {

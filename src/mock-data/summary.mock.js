@@ -1,4 +1,4 @@
-const summaryMockData = {
+export const summaryMockData = {
   datasets: [
     {
       data: [0, 25000],
@@ -6,4 +6,20 @@ const summaryMockData = {
   ],
 };
 
-export default summaryMockData;
+export const summaryMultipleMockData = {
+  labels: ['Design 2', 'Design 1'],
+  datasets: [
+    {
+      data: [35000, 25000],
+    }
+  ],
+};
+
+export const summaryThreeMockData = {
+  labels: ['Design 3', 'Design 2', 'Design 1'],
+  datasets: [
+    {
+      data: [22000, 35000, 25000],
+    }
+  ],
+};
