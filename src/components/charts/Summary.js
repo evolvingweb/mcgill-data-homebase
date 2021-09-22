@@ -46,11 +46,10 @@ const Summary = ({
   };
 
   return (
-      <section className="chart-container" style={ { width, height } }>
-        <Bar data={parsedData} options={OPTIONS} />
+      <section className="chart-container">
+        <Bar data={parsedData} options={OPTIONS} width={width} height={height} />
       </section>
   );
 };
-
 
 export default Summary;
