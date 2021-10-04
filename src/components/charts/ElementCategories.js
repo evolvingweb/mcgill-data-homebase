@@ -9,13 +9,14 @@ import {
 const ElementCategories = ({
   data,
   width = 940,
-  height = 200,
+  height = 220,
 }) => {
 
   const parsedData = () => {
     const { datasets } = data;
     const newDataSets = datasets.map((dataItem, index) => {
       dataItem.backgroundColor = COLORS[index] || '#000';
+
       return dataItem;
     });
 

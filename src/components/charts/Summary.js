@@ -10,7 +10,7 @@ import {
 const Summary = ({
   data,
   width = 940,
-  height = 200,
+  height = 220,
   gradientColors = DEFAULT_GRADIENT_COLORS,
 }) => {
 

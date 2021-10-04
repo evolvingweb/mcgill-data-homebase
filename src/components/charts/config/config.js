@@ -11,6 +11,7 @@ export const DEFAULT_OPTIONS = {
   indexAxis: 'y',
   barThickness: 40,
   maintainAspectRatio: false,
+  responsive: true,
   scales: {
     y:{
       grid: {
