@@ -47,7 +47,7 @@ export const OPTIONS = {
           size: 12,
           weight: 600,
         },
-        padding: { top: 12 }
+        padding: { top: 0 }
       },
       grid: {
         display: false,
@@ -55,7 +55,13 @@ export const OPTIONS = {
         drawTicks: false,
       },
       ticks: {
-        display: false,
+        color: MAIN_COLORS.blackOlive,
+        font: {
+          family: FONT_FAMILY,
+          size: 12,
+          weight: 600,
+        },
+        padding: 10,
       },
     },
   },

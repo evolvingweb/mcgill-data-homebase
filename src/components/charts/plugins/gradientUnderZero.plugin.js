@@ -22,7 +22,7 @@ const gradientUnderZero = {
     } = opts;
 
     const zeroGradient = canvas.getContext('2d')
-        .createLinearGradient(0, y.getPixelForValue(0), 0, height - top);
+        .createLinearGradient(0, y.getPixelForValue(0), 0, height - (top + 30));
     zeroGradient.addColorStop(0, colorStart);
     zeroGradient.addColorStop(1, colorEnd);
     ctx.fillStyle = zeroGradient;

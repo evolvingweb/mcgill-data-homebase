@@ -11,7 +11,7 @@ import zeroZeroLine from './plugins/zeroZeroLine.plugin';
 const LifeCycle = ({
   data,
   width = 940,
-  height = 220,
+  height = 240,
 }) => {
 
   const parsedData = () => {
