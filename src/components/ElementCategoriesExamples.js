@@ -6,11 +6,11 @@ const ElementCategoriesExamples = () => {
       <>
         <section>
           <h2>Element Categories</h2>
-            <ElementCategories data={elementCategoriesMockData} />
+          <ElementCategories data={elementCategoriesMockData} />
         </section>
         <section>
           <h2>Element Categories (Multiple)</h2>
-            <ElementCategories data={elementCategoriesMultipleMockData} height={300} />
+          <ElementCategories data={elementCategoriesMultipleMockData} height={300} />
         </section>
       </>
 

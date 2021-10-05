@@ -1,8 +1,10 @@
 import _merge from 'lodash.merge';
 
 export const COLORS = {
+  black: '#000',
   blackOlive: '#3F3F37',
   darkGray: '#6E7777',
+  gridColor: '#D9DEDD',
 };
 
 export const FONT_FAMILY = "'Inter', sans-serif";
@@ -29,7 +31,7 @@ export const DEFAULT_OPTIONS = {
     x: {
       grid:{
         borderDash: [2,3],
-        color: '#D9DEDD',
+        color: COLORS.gridColor,
         borderWidth: 2,
         borderColor: 'black',
       },

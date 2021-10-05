@@ -6,7 +6,7 @@ const SummaryExamples = () => {
       <>
         <section>
           <h2>Summary</h2>
-            <Summary data={summaryMockData} />
+          <Summary data={summaryMockData} />
         </section>
 
         <section>

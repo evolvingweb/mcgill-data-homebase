@@ -7,12 +7,6 @@ export const DEFAULT_GRADIENT_COLORS = [
 
 export const DEFAULT_DATA = {
   labels: ['', ''],
-  // datasets: [
-  //   {
-  //     data: [0, 25000],
-  //     backgroundColor: '#377B65',
-  //   }
-  // ],
 };
 
 export const OPTIONS = extendConfig({});
