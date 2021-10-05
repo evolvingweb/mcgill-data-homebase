@@ -1,6 +1,16 @@
 import _merge from 'lodash.merge';
 
-export const COLORS = {
+export const CHART_COLORS = [
+  '#A3BA19',
+  '#377B65',
+  '#C1E8C3',
+  '#2346A0',
+  '#67BAB3',
+  '#F05D5E',
+  '#FC8F40',
+];
+
+export const MAIN_COLORS = {
   black: '#000',
   blackOlive: '#3F3F37',
   darkGray: '#6E7777',
@@ -20,7 +30,7 @@ export const DEFAULT_OPTIONS = {
         display: false,
       },
       ticks: {
-        color: COLORS.blackOlive,
+        color: MAIN_COLORS.blackOlive,
         font: {
           family: FONT_FAMILY,
           size: 14,
@@ -31,13 +41,13 @@ export const DEFAULT_OPTIONS = {
     x: {
       grid:{
         borderDash: [2,3],
-        color: COLORS.gridColor,
+        color: MAIN_COLORS.gridColor,
         borderWidth: 2,
         borderColor: 'black',
       },
       ticks: {
         stepSize: 10000,
-        color: COLORS.darkGray,
+        color: MAIN_COLORS.darkGray,
         font: {
           family: FONT_FAMILY,
           size: 12,

@@ -1,14 +1,4 @@
-import { FONT_FAMILY, COLORS as MAIN_COLORS } from './config';
-
-export const COLORS = [
-  '#A3BA19',
-  '#377B65',
-  '#C1E8C3',
-  '#2346A0',
-  '#67BAB3',
-  '#F05D5E',
-  '#FC8F40',
-];
+import { FONT_FAMILY, MAIN_COLORS } from './config';
 
 export const OPTIONS = {
   indexAxis: 'x',

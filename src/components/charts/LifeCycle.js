@@ -1,9 +1,9 @@
 import { Bar } from 'react-chartjs-2';
 import _merge from 'lodash.merge';
 
+import { CHART_COLORS, MAIN_COLORS } from './config/config';
 import {
   OPTIONS,
-  COLORS,
 } from './config/life-cycles.config';
 import gradientUnderZero from './plugins/gradientUnderZero.plugin';
 import zeroZeroLine from './plugins/zeroZeroLine.plugin';
@@ -17,8 +17,8 @@ const LifeCycle = ({
   const parsedData = () => {
     const { datasets } = data;
     const newDataSets = datasets.map((dataItem, index) => {
-      dataItem.backgroundColor = COLORS[index] || '#000';
-      dataItem.hoverbackgroundColor = COLORS[index] || '#000';
+      dataItem.backgroundColor = CHART_COLORS[index] || MAIN_COLORS.black;
+      dataItem.hoverbackgroundColor = CHART_COLORS[index] || MAIN_COLORS.black;
 
       return dataItem;
     });
