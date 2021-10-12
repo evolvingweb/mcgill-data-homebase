@@ -6,34 +6,40 @@ export const carbonRatingData = {
     {
       label: 'Best',
       data: [100],
+      range: [-100, 0],
     },
     {
       label: 'Great',
       data: [100],
+      range: [0, 100],
     },
     {
       label: 'Good',
       data: [100],
+      range: [100, 200],
     },
     {
       label: 'Fair',
       data: [100],
+      range: [200, 300],
     },
     {
-      label: 'Average',
+      label: '',
       data: [100],
     },
     {
       label: 'Average',
       data: [100],
+      range: [300, 600],
     },
     {
-      label: 'Average',
+      label: '',
       data: [100],
     },
     {
       label: 'Poor',
       data: [50],
+      range: [600, 100000],
     },
   ],
 };
@@ -67,6 +73,7 @@ export const OPTIONS = {
       ticks: {
         padding: 15,
         color: MAIN_COLORS.darkGray,
+        align: 'start',
         font: {
           family: FONT_FAMILY,
           size: 12,
@@ -91,7 +98,7 @@ export const OPTIONS = {
     carbonRatingDecorators: {
       dots: { ...carbonRatingData.datasets },
       lineColor: MAIN_COLORS.gridColor,
-      value: 345,
+      value: 100,
     },
   },
 };
