@@ -1,4 +1,4 @@
-import _merge from 'lodash.merge';
+import _merge from 'lodash/merge';
 
 export const CHART_COLORS = [
   '#A3BA19',
@@ -15,6 +15,9 @@ export const MAIN_COLORS = {
   blackOlive: '#3F3F37',
   darkGray: '#6E7777',
   gridColor: '#D9DEDD',
+  green: '#A3BA19',
+  orange: '#FC8F40',
+  red: '#F05D5E',
 };
 
 export const FONT_FAMILY = "'Inter', sans-serif";
@@ -77,9 +80,6 @@ export const DEFAULT_OPTIONS = {
           weight: 400,
         },
       },
-    },
-    tooltip: {
-      enabled: false,
     },
   },
 };

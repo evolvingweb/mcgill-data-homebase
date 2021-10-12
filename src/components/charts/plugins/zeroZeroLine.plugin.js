@@ -1,6 +1,6 @@
 const zeroZeroLine = {
   id: 'zeroZeroLine',
-  beforeDatasetsDraw: (chart, args, opts) => {
+  beforeDraw: (chart, args, opts) => {
     const {
       ctx,
       chartArea: {

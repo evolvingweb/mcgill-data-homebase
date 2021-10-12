@@ -10,7 +10,7 @@ export const summaryMultipleMockData = {
   labels: ['', 'Design 2', 'Design 1'],
   datasets: [
     {
-      data: [0, 35000, 25000],
+      data: [0, 35000, 45000],
     }
   ],
 };

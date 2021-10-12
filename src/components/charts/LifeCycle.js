@@ -1,5 +1,5 @@
 import { Bar } from 'react-chartjs-2';
-import _merge from 'lodash.merge';
+import _merge from 'lodash/merge';
 
 import { CHART_COLORS, MAIN_COLORS } from './config/config';
 import {

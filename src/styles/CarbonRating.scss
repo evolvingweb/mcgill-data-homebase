@@ -1,0 +1,30 @@
+.carbon-rating {
+  padding-bottom: 8px;
+  background-color: rgba(#F00, .3);
+  position: relative;
+
+  .bg {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    background: linear-gradient(90deg, #A3BA19 28.38%, #FC8F40 71.35%, #F05D5E 100%);
+  }
+
+  .vertical-line,
+  .item {
+    width: 13%;
+  }
+
+  .item {
+    text-align: center;
+    padding: .8rem 1rem;
+    font-size: .875rem;
+    text-transform: uppercase;
+    font-weight: bold;
+
+    &.poor {
+      width: 9%;
+    }
+
+  }
+}

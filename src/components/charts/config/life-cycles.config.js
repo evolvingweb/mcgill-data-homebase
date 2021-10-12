@@ -83,9 +83,6 @@ export const OPTIONS = {
         },
       },
     },
-    tooltip: {
-      enabled: false,
-    },
     zeroZeroLine: {
       color: MAIN_COLORS.black,
       width: 2,
