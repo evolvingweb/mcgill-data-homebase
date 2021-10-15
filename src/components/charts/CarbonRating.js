@@ -9,7 +9,7 @@ import { MAIN_COLORS } from './config/config';
 import { carbonRatingData, OPTIONS } from './config/carbon-rating.config';
 import carbonRatingDecorators from './plugins/carbon-rating-decorators.plugin';
 
-import 'styles/CarbonRating.scss';
+import 'styles/CarbonRating.css';
 
 const CarbonRating = ({
  value = 0,

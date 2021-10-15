@@ -1,18 +1,10 @@
-import './styles/App.scss';
-import SummaryExamples from './components/SummariesExamples';
-import ElementCategoriesExamples from './components/ElementCategoriesExamples';
-import LifeCycleExamples from './components/LifeCycleExamples';
-import CarbonRatingExamples from './components/CarbonRatingExamples';
-
+import './styles/App.css';
+import Filters from './components/Filters';
 
 function App() {
   return (
     <div className="App">
-      <h1>Charts Demo</h1>
-      <CarbonRatingExamples />
-      <LifeCycleExamples />
-      <ElementCategoriesExamples />
-      <SummaryExamples />
+      <Filters />
     </div>
   );
 }
