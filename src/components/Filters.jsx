@@ -5,6 +5,7 @@ import _each from 'lodash/each';
 import { AppContext } from 'context/AppContextProvider';
 import filterRawData from 'mock-data/filters.json';
 import parseFilters, { validateFilters } from 'utils/filter.parser';
+import FILTER_CATEGORIES from 'utils/filters.categories';
 import Heading from './common/Heading';
 import classNames from 'classnames';
 import Container from './common/Container';
@@ -12,6 +13,7 @@ import Container from './common/Container';
 import { ReactComponent as CancelIcon } from 'images/cancel.svg';
 import FilterField from './FilterField';
 import Button from './Button';
+import _isFunction from 'lodash/isFunction';
 
 const ROOF_TYPE_KEY = 'Roof type';
 const ROOF_TYPE_VALUE = 'Flat';
@@ -22,7 +24,7 @@ const ROOF_FLAT_EXCLUDED_FIELDS = [
 
 
 
-const Filters = () => {
+const Filters = ({ onApply }) => {
   const filterData = parseFilters(filterRawData);
   const currentDefaultFilter = {};
   _each(filterData, (value, key) => {
@@ -30,7 +32,7 @@ const Filters = () => {
   });
 
   const [currentFilter, setCurrentFilter] = useState(currentDefaultFilter);
-  const [isValidFilter, setIsValidFilter] = useState(false);
+  const [validFilter, setIsValidFilter] = useState(false);
   const { showFilters, toggleShowFilters } = React.useContext(AppContext);
   const isFlatRoofType = currentFilter[ROOF_TYPE_KEY] === ROOF_TYPE_VALUE;
 
@@ -45,12 +47,17 @@ const Filters = () => {
     }
     setCurrentFilter(newCurrentFilter);
   };
+  const onApplyFilters = () => {
+    if (validFilter && _isFunction(onApply)) {
+      onApply(validFilter);
+      toggleShowFilters();
+    }
+  };
 
   useEffect(() => {
-    console.log(currentFilter);
-    const validFilter = validateFilters(filterRawData, currentFilter);
-    if (validFilter !== isValidFilter) {
-      setIsValidFilter(validFilter);
+    const isValidFilter = validateFilters(filterRawData, currentFilter);
+    if (isValidFilter !== validFilter) {
+      setIsValidFilter(isValidFilter);
     }
     /* eslint-disable-next-line */
   }, [currentFilter, setIsValidFilter]);
@@ -91,10 +98,13 @@ const Filters = () => {
                     <div className="grid grid-cols-1 gap-8" key={index}>
                       {
                         _map(columnData, columnItem => {
-                          const { title, filters } = columnItem;
+                          const { key, title, filters, disabled = false, } = columnItem;
+                          if (disabled) {
+                            return null;
+                          }
                           return (
                               <div key={title}>
-                                <p className="text-xs text-rain-forest">{title}</p>
+                                <p className="text-xs text-rain-forest">{key}. {title}</p>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                                   {
                                     _map(filters, filter => {
@@ -126,7 +136,7 @@ const Filters = () => {
             }
           </div>
           <div className="mt-8 pt-8 border-t border-rain-forest text-right">
-            <Button onClick={toggleShowFilters} disabled={!isValidFilter}>Apply</Button>
+            <Button onClick={onApplyFilters} disabled={!validFilter}>Apply</Button>
           </div>
         </Container>
       </section>
@@ -134,68 +144,3 @@ const Filters = () => {
 };
 
 export default Filters;
-
-const FILTER_CATEGORIES = [
-  [
-    {
-      title: '1. Roof',
-      filters: [
-        'Roof type',
-        'Roof Material',
-      ],
-    },
-    {
-      title: '2. Structure',
-      filters: [
-        'Basement',
-        'Structure',
-        'Foundation',
-      ],
-    },
-    {
-      title: '3. Doors',
-      filters: [
-        'Interior Door Material',
-        'Exterior Door Material',
-        'Double sliding Door Material',
-      ],
-    },
-  ],
-  [
-    {
-      title: '4. Walls',
-      filters: [
-        'Wall Facade Material',
-        'Interior Wall Material',
-      ],
-    },
-    {
-      title: '5. Windows',
-      filters: [
-        'Casement Window',
-        'Awning Window',
-        'Fixed Window',
-        'Skylight Flat Window',
-        'Skylight Top Hung Window',
-        'Fenster Window',
-        'Dormer Window',
-        'Light Dome',
-        'Solarium',
-      ],
-    },
-    {
-      title: '6. Floors and Stairs',
-      filters: [
-        'Floor Finish Material',
-        'Stairs and Railing Material',
-      ],
-    },
-    {
-      title: '7. TBD',
-      filters: [
-        'Porch',
-        'Balcony',
-      ],
-    },
-  ]
-];

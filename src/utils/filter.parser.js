@@ -49,15 +49,19 @@ const parseFilters = (rawFilters) => {
   return [];
 };
 
+/**
+ * Validate each filter in order to know if it fits with any record in the raw filter data.
+ * @param rawFilters
+ * @param filters
+ * @returns {*}
+ */
 export const validateFilters = (rawFilters, filters) => {
-  const validFilter = _find(rawFilters, (filter) => {
+  return _find(rawFilters, (filter) => {
     return _every(filters, (value, key) => {
       const valueInFilter = filter[key];
       return valueInFilter === value;
     })
   });
-
-  return !!validFilter;
 };
 
 export default parseFilters;
