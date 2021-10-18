@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import _map from 'lodash/map';
+import _each from 'lodash/each';
 
 import { AppContext } from 'context/AppContextProvider';
 import filterRawData from 'mock-data/filters.json';
-import parseFilters from 'utils/filter.parser';
+import parseFilters, { validateFilters } from 'utils/filter.parser';
 import Heading from './common/Heading';
 import classNames from 'classnames';
 import Container from './common/Container';
@@ -12,11 +13,48 @@ import { ReactComponent as CancelIcon } from 'images/cancel.svg';
 import FilterField from './FilterField';
 import Button from './Button';
 
-const Filters = () => {
-  const { showFilters, toggleShowFilters } = React.useContext(AppContext);
+const ROOF_TYPE_KEY = 'Roof type';
+const ROOF_TYPE_VALUE = 'Flat';
+const ROOF_FLAT_EXCLUDED_FIELDS = [
+  'Skylight Flat Window',
+  'Skylight Top Hung Window',
+];
 
+
+
+const Filters = () => {
   const filterData = parseFilters(filterRawData);
-  // const [selectedFilter, ]
+  const currentDefaultFilter = {};
+  _each(filterData, (value, key) => {
+    currentDefaultFilter[key] = '';
+  });
+
+  const [currentFilter, setCurrentFilter] = useState(currentDefaultFilter);
+  const [isValidFilter, setIsValidFilter] = useState(false);
+  const { showFilters, toggleShowFilters } = React.useContext(AppContext);
+  const isFlatRoofType = currentFilter[ROOF_TYPE_KEY] === ROOF_TYPE_VALUE;
+
+  const onFilterFieldChange = (fieldName, value) => {
+    const newCurrentFilter = { ...currentFilter, [fieldName]: value };
+
+    /* remove Slight options*/
+    if (fieldName === ROOF_TYPE_KEY) {
+      _each(ROOF_FLAT_EXCLUDED_FIELDS, value => {
+        newCurrentFilter[value] = '';
+      })
+    }
+    setCurrentFilter(newCurrentFilter);
+  };
+
+  useEffect(() => {
+    console.log(currentFilter);
+    const validFilter = validateFilters(filterRawData, currentFilter);
+    if (validFilter !== isValidFilter) {
+      setIsValidFilter(validFilter);
+    }
+    /* eslint-disable-next-line */
+  }, [currentFilter, setIsValidFilter]);
+
   const componentClasses = classNames(
       'fixed',
       'z-10',
@@ -61,11 +99,19 @@ const Filters = () => {
                                   {
                                     _map(filters, filter => {
                                       const filterItemData = filterData[filter] || [];
+                                      /* Remove ROOF_FLAT_EXCLUDED_FIELDS when the filter is Roof Type*/
+                                      if (isFlatRoofType && ROOF_FLAT_EXCLUDED_FIELDS.includes(filter)) {
+                                        return null;
+                                      }
                                       if (!filterItemData.length) {
                                         return null;
                                       }
                                       return (
-                                          <FilterField options={filterItemData} defaultOption={filter} key={filter} />
+                                          <FilterField
+                                              options={filterItemData}
+                                              defaultOption={filter}
+                                              key={filter}
+                                              onChange={onFilterFieldChange} />
                                       );
                                     })
                                   }
@@ -80,7 +126,7 @@ const Filters = () => {
             }
           </div>
           <div className="mt-8 pt-8 border-t border-rain-forest text-right">
-              <Button onClick={toggleShowFilters}>Apply</Button>
+            <Button onClick={toggleShowFilters} disabled={!isValidFilter}>Apply</Button>
           </div>
         </Container>
       </section>
@@ -109,9 +155,9 @@ const FILTER_CATEGORIES = [
     {
       title: '3. Doors',
       filters: [
-        'Basement',
-        'Structure',
-        'Foundation',
+        'Interior Door Material',
+        'Exterior Door Material',
+        'Double sliding Door Material',
       ],
     },
   ],

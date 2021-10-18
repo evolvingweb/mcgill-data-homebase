@@ -1,5 +1,7 @@
 import _each from 'lodash/each';
 import _isEmpty from 'lodash/isEmpty';
+import _find from 'lodash/find';
+import _every from 'lodash/every';
 
 const VALID_FILTERS = [
   'Roof type',
@@ -45,6 +47,17 @@ const parseFilters = (rawFilters) => {
   }
 
   return [];
+};
+
+export const validateFilters = (rawFilters, filters) => {
+  const validFilter = _find(rawFilters, (filter) => {
+    return _every(filters, (value, key) => {
+      const valueInFilter = filter[key];
+      return valueInFilter === value;
+    })
+  });
+
+  return !!validFilter;
 };
 
 export default parseFilters;

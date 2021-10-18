@@ -95,10 +95,11 @@ const FilterField = ({
   }
   const mergedOptions = _map(options, option => ({ value: option, label: option }));
 
-  const onSelectChange = (e) => {
+  const onSelectChange = (selectedValue, select) => {
+    const { value } = selectedValue;
+    const { name } = select;
     if (_isFunction(onChange)) {
-      const valueToSend = defaultOption === e.target.value ? null : e.target.value;
-      onChange(defaultOption, valueToSend);
+      onChange(name, value);
     }
   };
 
@@ -106,6 +107,7 @@ const FilterField = ({
       <Select
           options={mergedOptions}
           styles={styles}
+          name={defaultOption}
           onChange={onSelectChange}
           placeholder={defaultOption}
           components={{
