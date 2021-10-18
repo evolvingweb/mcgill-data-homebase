@@ -82,9 +82,6 @@ const Filters = () => {
           <div className="mt-8 pt-8 border-t border-rain-forest text-right">
               <Button onClick={toggleShowFilters}>Apply</Button>
           </div>
-          <pre>
-            { JSON.stringify(filterData) }
-          </pre>
         </Container>
       </section>
   );

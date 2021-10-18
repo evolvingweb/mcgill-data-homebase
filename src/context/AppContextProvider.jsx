@@ -7,7 +7,7 @@ export const AppContext = React.createContext({
 
 
 const AppContextProvider = ({ children }) => {
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(true);
   const toggleShowFilters = () => {
     setShowFilters(!showFilters);
   };

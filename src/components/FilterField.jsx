@@ -1,23 +1,99 @@
+import React from 'react';
 import _map from 'lodash/map';
+import Select, { components } from "react-select";
+
 import _isFunction from 'lodash/isFunction';
-import classNames from 'classnames';
+
+const { ValueContainer, Placeholder } = components;
+
+const styles = {
+  container: (provided) => ({
+    ...provided,
+  }),
+  valueContainer: (provided, state) => ({
+    ...provided,
+    overflow: 'visible',
+    paddingTop: state.hasValue ? '16px' : '12px',
+    paddingBottom: state.hasValue ? '8px' : '12px',
+  }),
+  placeholder: (provided, state) => ({
+    ...provided,
+    position: 'absolute',
+    top: state.hasValue || state.selectProps.inputValue ? -12 : 2,
+    transition: 'top 0.1s, font-size 0.1s, color .1s',
+    fontSize: (state.hasValue || state.selectProps.inputValue) ? 10 : 14,
+    color: state.hasValue ? '#377B65' : '#6E7777',
+  }),
+  input: (provided) => ({
+    ...provided,
+    margin: 0,
+    color: '#6E7777',
+    fontSize: 14,
+  }),
+  control: (provided) => ({
+    ...provided,
+    borderRadius: 0,
+  }),
+  indicatorSeparator: (provided) => ({
+    ...provided,
+    display: 'none'
+  }),
+  menu: (provided) => ({
+    ...provided,
+    marginTop: 1,
+    borderRadius: 0,
+    boxShadow: '0 10px 20px -25px rgba(0,0,0,.5)',
+    border: '1px solid #D9DEDD',
+  }),
+  menuList: (provided) => ({
+    ...provided,
+    marginTop: 1,
+    borderRadius: 0,
+    paddingTop: 0,
+    paddingBottom: 0,
+  }),
+  option: (provided, state) => ({
+    ...provided,
+    fontSize: 14,
+    color: '#3F3F37',
+    backgroundColor: state.isFocused
+      ? '#C1E8C3'
+      : state.isFocused
+        ? '#C1E8C3'
+        : '#FFF',
+    ':active': {
+      ...styles[':active'],
+      backgroundColor: !state.isDisabled
+          ? state.isSelected
+              ? '#F3F5F5'
+              : '#F3F5F5'
+          : undefined,
+    },
+  }),
+}
+
+const CustomValueContainer = ({ children, ...props }) => {
+  return (
+      <ValueContainer {...props}>
+        <Placeholder {...props} isFocused={props.isFocused}>
+          {props.selectProps.placeholder}
+        </Placeholder>
+        {React.Children.map(children, child =>
+            child && child.type !== Placeholder ? child : null
+        )}
+      </ValueContainer>
+  );
+};
 
 const FilterField = ({
                        defaultOption,
                        options = [],
                        onChange,
-                       className
                      }) => {
   if (!options.length) {
     return null;
   }
-
-  const componentClasses = classNames(
-      'lg:block',
-      'p-3',
-      className,
-  );
-  const mergedOptions = [defaultOption, ...options] || [defaultOption];
+  const mergedOptions = _map(options, option => ({ value: option, label: option }));
 
   const onSelectChange = (e) => {
     if (_isFunction(onChange)) {
@@ -27,21 +103,15 @@ const FilterField = ({
   };
 
   return (
-      <select className={componentClasses} defaultValue={defaultOption} onChange={onSelectChange}>
-        {
-          _map(mergedOptions, (optionItem) => {
-            if (!optionItem) {
-              return null;
-            }
-            return (
-                <option value={optionItem} key={optionItem}>
-                  {optionItem}
-                </option>
-            );
-          })
-        }
-
-      </select>
+      <Select
+          options={mergedOptions}
+          styles={styles}
+          onChange={onSelectChange}
+          placeholder={defaultOption}
+          components={{
+            ValueContainer: CustomValueContainer
+          }}
+      />
   );
 };
 
