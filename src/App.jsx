@@ -1,19 +1,21 @@
-import './styles/App.css';
-import Filters from './components/Filters';
 import React from 'react';
+import Filters from './components/Filters';
 import { AppContext } from './context/AppContextProvider';
-import Button from './components/Button';
+import HomeView from './components/views/home';
+
+import './styles/App.css';
 
 function App() {
-  const { toggleShowFilters } = React.useContext(AppContext);
+  const { toggleShowFilters, designs } = React.useContext(AppContext);
+
   const onApplyFilters = (newFilters) => {
     console.log({ newFilters });
   };
 
   return (
-      <div className="App relative">
+      <div className="App relative min-h-screen">
         <Filters onApply={onApplyFilters} />
-        <Button type="button" onClick={toggleShowFilters}>Show Filters</Button>
+        {designs && !designs.length && <HomeView onStart={toggleShowFilters} />}
       </div>
   );
 }

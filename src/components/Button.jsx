@@ -7,6 +7,8 @@ const Button = ({ children, className, onClick, disabled = false }) => {
       'text-white',
       'py-4',
       'px-8',
+      'hover:bg-black-olive',
+      'transition-colors',
       {
         'disabled:pointer-events-none': disabled,
         'disabled:bg-dark-gray': disabled,

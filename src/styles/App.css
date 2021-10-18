@@ -1,11 +1,3 @@
-.App {
- margin: auto;
-
-  > section {
-    margin-bottom: 3rem;
-  }
-}
-
 .chart-container {
   position: relative;
   margin: auto;
