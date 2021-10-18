@@ -1,21 +1,24 @@
+import React from 'react';
 import _map from 'lodash/map';
-import _isFunction from 'lodash/isFunction';
 
+import { AppContext } from 'context/AppContextProvider';
 import filterRawData from 'mock-data/filters.json';
-import parseFilters from '../utils/filter.parser';
+import parseFilters from 'utils/filter.parser';
 import Heading from './common/Heading';
 import classNames from 'classnames';
 import Container from './common/Container';
 
 import { ReactComponent as CancelIcon } from 'images/cancel.svg';
 import FilterField from './FilterField';
+import Button from './Button';
 
-const Filters = ({
-                   onClose,
-                 }) => {
+const Filters = () => {
+  const { showFilters, toggleShowFilters } = React.useContext(AppContext);
+
   const filterData = parseFilters(filterRawData);
   const componentClasses = classNames(
       'fixed',
+      'z-10',
       'top-0',
       'left-0',
       'w-full',
@@ -25,18 +28,22 @@ const Filters = ({
       'px-6',
       'py-6',
       'lg:py-14',
+      'transition-transform',
+      'transform',
+      'duration-500',
+      {
+        '-translate-x-full': !showFilters,
+      },
   );
-  const onClickClose = () => {
-    if (_isFunction(onClose)) {
-      onClose();
-    }
-  };
+
   return (
       <section className={componentClasses}>
-        <Heading size={2} className="pr-14 lg:pr-0">Select Multi-Family Design Options</Heading>
-        <button type="button" className="absolute top-4 right-6 z-10" onClick={onClickClose}>
-          <CancelIcon />
-        </button>
+        <Container className="relative max-h-full relative">
+          <Heading size={2} className="pr-14 lg:pr-0">Select Multi-Family Design Options</Heading>
+          <button type="button" className="absolute -top-4 right-0 z-10" onClick={toggleShowFilters}>
+            <CancelIcon />
+          </button>
+        </Container>
         <Container className="relative max-h-full overflow-y-auto pb-14">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             {
@@ -68,9 +75,9 @@ const Filters = ({
               })
             }
           </div>
-          <pre>
-              {JSON.stringify(filterData)}
-            </pre>
+          <div className="mt-8 pt-8 border-t border-rain-forest text-right">
+              <Button onClick={toggleShowFilters}>Apply</Button>
+          </div>
         </Container>
       </section>
   );
