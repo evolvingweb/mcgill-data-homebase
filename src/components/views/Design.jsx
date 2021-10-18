@@ -8,9 +8,48 @@ import Button from '../Button';
 import ButtonIcon from '../ButtonIcon';
 
 import { ReactComponent as PencilIcon } from 'images/pencil.svg';
+import { ReactComponent as ExclamationIcon } from 'images/exclamation-mark.svg';
 import FILTER_CATEGORIES from '../../utils/filters.categories';
+import CarbonRating from '../charts/CarbonRating';
+import Summary from '../charts/Summary';
 
 const DesignView = ({ id, design, onEdit }) => {
+  const imageAlt = `Design ${id}`;
+  const designImageSrc = `https://via.placeholder.com/324x506.png?text=${imageAlt}`;
+
+  const {
+    'Sum of embodied carbon': sumEmbodiedCarbon = 0,
+    'Embodied carbon rating': embodiedCarbonRating = 0,
+  } = design;
+
+  const sumEmbodiedCarbonParts = sumEmbodiedCarbon.toString().split('.');
+
+  const replaceCommas = sumEmbodiedCarbon.replace(',', '');
+  const chartData = {
+    datasets: [
+      {
+        data: [0, replaceCommas],
+      }
+    ],
+  };
+
+  const chartOptions = {
+    barThickness: 60,
+    scales: {
+      x: {
+        ticks: {
+          callback: (value) => {
+            if (!value) {
+              return 0;
+            }
+
+            return `${value / 1000}K`
+          }
+        },
+      },
+    },
+  };
+
   const containerClasses = classNames(
       'bg-white',
       'px-6',
@@ -25,8 +64,15 @@ const DesignView = ({ id, design, onEdit }) => {
       'max-w-screen-xl',
       'mx-auto',
       'grid',
-      'grid-cols-1 lg:grid-cols-3',
+      'grid-cols-1 lg:grid-cols-4',
       'gap-14',
+  );
+
+  const titleClasses = classNames(
+      'text-4xl',
+      'font-bold',
+      'pb-7',
+      'mb-7',
   );
 
   const onEditClick = () => {
@@ -78,13 +124,37 @@ const DesignView = ({ id, design, onEdit }) => {
               }
             </div>
           </div>
-          <div>
-            Image here
+          <div className="col-span-2">
+            <img src={designImageSrc} alt={imageAlt} className="mx-auto" />
+            <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
+              Building Embodied Carbon Rating
+              <ExclamationIcon className="ml-2" />
+            </h3>
+            <CarbonRating value={embodiedCarbonRating} />
           </div>
-          <div>
-            <h2>Design {id}</h2>
+          <div className="flex align-start flex-col">
+            <h2 className={titleClasses}>Design {id}</h2>
+
+            <div className="mt-auto mb-3">
+              <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
+                Sum of Embodied Carbon
+                <ExclamationIcon className="ml-2" />
+              </h3>
+              <p className="text-2xl font-normal">
+                {sumEmbodiedCarbonParts[0]}
+                <span>{sumEmbodiedCarbonParts.length > 1 ? '.' : null}</span>
+                <span className="text-xs">{sumEmbodiedCarbonParts.length > 1 ? sumEmbodiedCarbonParts[1] : null}</span>
+                <span className="ml-1 text-xs font-bold">KgCO2eq/m2</span>
+              </p>
+              <div className="relative -left-2">
+                <Summary data={chartData} height={80} options={chartOptions} />
+              </div>
+            </div>
           </div>
         </section>
+        <pre className="w-full h-56 overflow-visible whitespace-pre-wrap text-xs">
+          {JSON.stringify(design)}
+        </pre>
       </section>
   );
 };

@@ -33,8 +33,6 @@ const CarbonRating = ({
   });
 
   const { label = '' }= currentRatingLabel || {};
-  console.log(label);
-
 
   useEffect(() => {
     const parsedData = (canvas, canvasWidth = width) => {
@@ -77,12 +75,14 @@ const CarbonRating = ({
 
   return (
       <section className="carbon-rating">
-      <h3>
+      <h3 className="text-2xl font-normal">
         {label}
-        <span>{value}KgCO2eq/m2</span>
+        <span className="ml-3 text-xs">({value} KgCO2eq/m2)</span>
       </h3>
       <section className="chart-container">
-        <Bar data={{}} options={mergedOptions} ref={chartRef} width={width} height={height} plugins={[carbonRatingDecorators]} />
+        <div className="relative -left-3">
+          <Bar data={{}} options={mergedOptions} ref={chartRef} width={width} height={height} plugins={[carbonRatingDecorators]} />
+        </div>
       </section>
       </section>
   );

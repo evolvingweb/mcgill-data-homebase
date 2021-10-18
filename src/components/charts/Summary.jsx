@@ -12,7 +12,11 @@ const Summary = ({
   width = 940,
   height = 220,
   gradientColors = DEFAULT_GRADIENT_COLORS,
+  options = [],
 }) => {
+
+  console.log({ data });
+  const mergedOptions = _merge({}, OPTIONS, options);
 
   const parsedData = (canvas) => {
     const ctx = canvas.getContext('2d');
@@ -47,7 +51,7 @@ const Summary = ({
 
   return (
       <section className="chart-container">
-        <Bar data={parsedData} options={OPTIONS} width={width} height={height} />
+        <Bar data={parsedData} options={mergedOptions} width={width} height={height} />
       </section>
   );
 };

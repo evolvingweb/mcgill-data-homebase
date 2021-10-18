@@ -74,10 +74,10 @@ const Filters = ({ onApply }) => {
   }, [currentDesign, showFilters]);
 
   /* @TODO: Remove this */
-  // useEffect(() => {
-  //   onApply(filterRawData[0]);
-  //   /* eslint-disable-next-line */
-  // }, []);
+  useEffect(() => {
+    onApply(filterRawData[0]);
+    /* eslint-disable-next-line */
+  }, []);
 
   const componentClasses = classNames(
       'fixed',
