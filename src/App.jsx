@@ -19,11 +19,15 @@ function App() {
     addDesign(newFilters);
   };
 
+  const onEditDesign = () => {
+    toggleShowFilters();
+  };
+
   return (
       <div className="App relative min-h-screen">
         <Filters onApply={onApplyFilters} />
         {designs && !designs.length && <HomeView onStart={toggleShowFilters} />}
-        {currentDesign && <DesignView design={currentDesign} id={currentDesignIndex + 1} />}
+        {currentDesign && <DesignView design={currentDesign} id={currentDesignIndex + 1} onEdit={onEditDesign} />}
 
       </div>
   );

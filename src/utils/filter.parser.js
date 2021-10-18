@@ -57,10 +57,19 @@ const parseFilters = (rawFilters) => {
  */
 export const validateFilters = (rawFilters, filters) => {
   return _find(rawFilters, (filter) => {
-    return _every(filters, (value, key) => {
+    // console.group(`Option number ${filter['Option number']}`);
+    const isValid = _every(filters, (value, key) => {
       const valueInFilter = filter[key];
+      // console.log({value, key, valueInFilter});
       return valueInFilter === value;
     })
+    if (isValid) {
+      // console.log(`%c Valid Option number ${filter['Option number']}`, 'color: yellow; font-weight: 800;');
+    } else {
+      // console.log(`%c Invalid Option number ${filter['Option number']}`, 'color: red; font-weight: 800;');
+    }
+    // console.groupEnd();
+    return isValid;
   });
 };
 

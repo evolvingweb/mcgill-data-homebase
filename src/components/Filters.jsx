@@ -25,15 +25,15 @@ const ROOF_FLAT_EXCLUDED_FIELDS = [
 
 
 const Filters = ({ onApply }) => {
-  const filterData = parseFilters(filterRawData);
-  const currentDefaultFilter = {};
-  _each(filterData, (value, key) => {
-    currentDefaultFilter[key] = '';
-  });
+  const {
+    showFilters,
+    toggleShowFilters,
+    currentDesign,
+  } = React.useContext(AppContext);
 
-  const [currentFilter, setCurrentFilter] = useState(currentDefaultFilter);
+  const filterData = parseFilters(filterRawData);
+  const [currentFilter, setCurrentFilter] = useState({});
   const [validFilter, setIsValidFilter] = useState(false);
-  const { showFilters, toggleShowFilters } = React.useContext(AppContext);
   const isFlatRoofType = currentFilter[ROOF_TYPE_KEY] === ROOF_TYPE_VALUE;
 
   const onFilterFieldChange = (fieldName, value) => {
@@ -61,6 +61,23 @@ const Filters = ({ onApply }) => {
     }
     /* eslint-disable-next-line */
   }, [currentFilter, setIsValidFilter]);
+
+  useEffect(() => {
+    if (showFilters) {
+      const assignValuesToFilter = {};
+      _each(filterData, (value, key) => {
+        assignValuesToFilter[key] = (currentDesign && currentDesign[key]) || '';
+      });
+      setCurrentFilter(assignValuesToFilter);
+    }
+    /* eslint-disable-next-line */
+  }, [currentDesign, showFilters]);
+
+  /* @TODO: Remove this */
+  // useEffect(() => {
+  //   onApply(filterRawData[0]);
+  //   /* eslint-disable-next-line */
+  // }, []);
 
   const componentClasses = classNames(
       'fixed',

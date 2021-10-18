@@ -10,7 +10,7 @@ import ButtonIcon from '../ButtonIcon';
 import { ReactComponent as PencilIcon } from 'images/pencil.svg';
 import FILTER_CATEGORIES from '../../utils/filters.categories';
 
-const DesignView = ({ id, design }) => {
+const DesignView = ({ id, design, onEdit }) => {
   const containerClasses = classNames(
       'bg-white',
       'px-6',
@@ -20,7 +20,6 @@ const DesignView = ({ id, design }) => {
       'min-h-screen',
       'flex',
       'flex-col',
-      // 'justify-center',
   );
   const componentClasses = classNames(
       'max-w-screen-xl',
@@ -30,13 +29,19 @@ const DesignView = ({ id, design }) => {
       'gap-14',
   );
 
+  const onEditClick = () => {
+    if (_isFunction(onEdit)) {
+      onEdit();
+    }
+  };
+
   return (
       <section className={containerClasses}>
         <section className={componentClasses}>
           <div>
             <h3 className="text-black-olive font-bold text-lg">Multi-Family Design Options</h3>
             <div className="mt-7">
-              <ButtonIcon icon={PencilIcon}>Edit</ButtonIcon>
+              <ButtonIcon icon={PencilIcon} onClick={onEditClick}>Edit</ButtonIcon>
             </div>
             <div className="mt-7">
               {
