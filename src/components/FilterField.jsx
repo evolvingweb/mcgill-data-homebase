@@ -4,10 +4,14 @@ import classNames from 'classnames';
 
 const FilterField = ({
                        defaultOption,
-                       options,
+                       options = [],
                        onChange,
                        className
                      }) => {
+  if (!options.length) {
+    return null;
+  }
+
   const componentClasses = classNames(
       'lg:block',
       'p-3',

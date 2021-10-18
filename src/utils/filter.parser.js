@@ -1,4 +1,5 @@
 import _each from 'lodash/each';
+import _isEmpty from 'lodash/isEmpty';
 
 const VALID_FILTERS = [
   'Roof type',
@@ -18,6 +19,12 @@ const VALID_FILTERS = [
   'Fixed Window',
   'Skylight Flat Window',
   'Skylight Top Hung Window',
+  'Fenster Window',
+  'Dormer Window',
+  'Light Dome',
+  'Solarium',
+  'Balcony',
+  'Porch',
 ];
 
 const parseFilters = (rawFilters) => {
@@ -27,7 +34,7 @@ const parseFilters = (rawFilters) => {
       _each(filterItem, (value, key) => {
         if (VALID_FILTERS.includes(key)) {
           const filterItems = filters[key] || [];
-          if (!filterItems.includes(value)) {
+          if (!filterItems.includes(value) && !_isEmpty(value)) {
             filterItems.push(value);
           }
           filters[key] = filterItems;

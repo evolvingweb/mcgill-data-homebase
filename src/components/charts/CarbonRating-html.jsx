@@ -48,7 +48,7 @@ const CarbonRating = ({ value }) => {
         <div className="carbon-rating">
           <div className="bg">
             {
-              _map(RATINGS, ({ key, name, range }) => {
+              _map(RATINGS, ({ key, name }) => {
                 const classNames = [
                     'item',
                     name && name.toLowerCase(),

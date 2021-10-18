@@ -16,6 +16,7 @@ const Filters = () => {
   const { showFilters, toggleShowFilters } = React.useContext(AppContext);
 
   const filterData = parseFilters(filterRawData);
+  // const [selectedFilter, ]
   const componentClasses = classNames(
       'fixed',
       'z-10',
@@ -45,7 +46,7 @@ const Filters = () => {
           </button>
         </Container>
         <Container className="relative max-h-full overflow-y-auto pb-14">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
             {
               _map(FILTER_CATEGORIES, (columnData, index) => {
                 return (
@@ -59,7 +60,10 @@ const Filters = () => {
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-3">
                                   {
                                     _map(filters, filter => {
-                                      const filterItemData = filterData[filter]
+                                      const filterItemData = filterData[filter] || [];
+                                      if (!filterItemData.length) {
+                                        return null;
+                                      }
                                       return (
                                           <FilterField options={filterItemData} defaultOption={filter} key={filter} />
                                       );
@@ -78,6 +82,9 @@ const Filters = () => {
           <div className="mt-8 pt-8 border-t border-rain-forest text-right">
               <Button onClick={toggleShowFilters}>Apply</Button>
           </div>
+          <pre>
+            { JSON.stringify(filterData) }
+          </pre>
         </Container>
       </section>
   );
@@ -127,6 +134,10 @@ const FILTER_CATEGORIES = [
         'Fixed Window',
         'Skylight Flat Window',
         'Skylight Top Hung Window',
+        'Fenster Window',
+        'Dormer Window',
+        'Light Dome',
+        'Solarium',
       ],
     },
     {
@@ -134,6 +145,13 @@ const FILTER_CATEGORIES = [
       filters: [
         'Floor Finish Material',
         'Stairs and Railing Material',
+      ],
+    },
+    {
+      title: '7. TBD',
+      filters: [
+        'Porch',
+        'Balcony',
       ],
     },
   ]
