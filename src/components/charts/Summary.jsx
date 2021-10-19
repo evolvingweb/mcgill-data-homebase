@@ -14,8 +14,6 @@ const Summary = ({
   gradientColors = DEFAULT_GRADIENT_COLORS,
   options = [],
 }) => {
-
-  console.log({ data });
   const mergedOptions = _merge({}, OPTIONS, options);
 
   const parsedData = (canvas) => {

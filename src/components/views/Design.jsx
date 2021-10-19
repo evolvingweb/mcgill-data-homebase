@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import _map from 'lodash/map';
 import _isFunction from 'lodash/isFunction';
 
-import homeBuildings from 'images/home-buildings.png';
-import Button from '../Button';
-import ButtonIcon from '../ButtonIcon';
+import Button, { BUTTON_TYPE, ICON_POSITION } from '../Button';
 
 import { ReactComponent as PencilIcon } from 'images/pencil.svg';
 import { ReactComponent as ExclamationIcon } from 'images/exclamation-mark.svg';
-import FILTER_CATEGORIES from '../../utils/filters.categories';
+import { ReactComponent as DiagonalArrows } from 'images/diagonal-arrows.svg';
+
+import FILTER_CATEGORIES from 'utils/filters.categories';
 import CarbonRating from '../charts/CarbonRating';
 import Summary from '../charts/Summary';
 
@@ -35,6 +35,7 @@ const DesignView = ({ id, design, onEdit }) => {
 
   const chartOptions = {
     barThickness: 60,
+    animation: false,
     scales: {
       x: {
         ticks: {
@@ -87,11 +88,11 @@ const DesignView = ({ id, design, onEdit }) => {
           <div>
             <h3 className="text-black-olive font-bold text-lg">Multi-Family Design Options</h3>
             <div className="mt-7">
-              <ButtonIcon icon={PencilIcon} onClick={onEditClick}>Edit</ButtonIcon>
+              <Button icon={PencilIcon} onClick={onEditClick} type={BUTTON_TYPE.TEXT} iconPosition={ICON_POSITION.LEFT}>Edit</Button>
             </div>
             <div className="mt-7">
               {
-                _map(FILTER_CATEGORIES, (columnData, index) => {
+                _map(FILTER_CATEGORIES, (columnData) => {
                   return _map(columnData, columnItem => {
                     const { title, filters, disabled = false, } = columnItem;
                     if (disabled) {
@@ -135,6 +136,9 @@ const DesignView = ({ id, design, onEdit }) => {
           <div className="flex align-start flex-col">
             <h2 className={titleClasses}>Design {id}</h2>
 
+            <div>
+              <Button icon={DiagonalArrows}>Save & view all metrics</Button>
+            </div>
             <div className="mt-auto mb-3">
               <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
                 Sum of Embodied Carbon

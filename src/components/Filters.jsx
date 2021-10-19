@@ -156,6 +156,9 @@ const Filters = ({ onApply }) => {
             <Button onClick={onApplyFilters} disabled={!validFilter}>Apply</Button>
           </div>
         </Container>
+        <pre className="max-w-full whitespace-pre-wrap text-xxs">
+          {JSON.stringify(currentFilter)}
+        </pre>
       </section>
   );
 };
