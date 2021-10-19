@@ -10,7 +10,10 @@ module.exports = {
       },
       fontFamily: {
         sans: ['"Inter"', 'sans-serif'],
-      }
+      },
+      maxWidth: {
+        'container': '1440px',
+      },
     },
     colors: {
       black: colors.black,
