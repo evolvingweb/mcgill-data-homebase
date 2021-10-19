@@ -19,14 +19,19 @@ const Button = ({
                   icon: Icon,
                   iconPosition = ICON_POSITION.RIGHT,
                   type = BUTTON_TYPE.BUTTON,
+                  invert = false,
                   disabled = false
                 }) => {
   const buttonClasses = classNames(
-      'bg-rain-forest',
       'text-white',
       'py-4',
       'px-8',
-      'hover:bg-black-olive',
+      {
+        'bg-rain-forest': !invert,
+        'hover:bg-black-olive': !invert,
+        'bg-black': invert,
+        'hover:bg-dark-gray': invert,
+      },
       className,
   );
 
@@ -64,11 +69,9 @@ const Button = ({
 
   return (
       <button type="button" className={componentClasses} onClick={onButtonClick} disabled={disabled}>
-        {iconLeft && Icon && <Icon className="mr-2" />}
-        <span>
-          {children}
-        </span>
-        {iconRight && Icon && <Icon className="ml-3" />}
+        {iconLeft && Icon && <Icon className="mr-2 w-5 h-5" />}
+        {children}
+        {iconRight && Icon && <Icon className="ml-3 w-5 h-5" />}
       </button>
   );
 };

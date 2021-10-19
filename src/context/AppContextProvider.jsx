@@ -5,11 +5,14 @@ export const AppContext = React.createContext({
   currentDesignIndex: 0,
   designs: [],
   currentDesign: {},
+  isCompareView: false,
   toggleShowFilters: () => {},
   nextDesign: () => {},
   addDesign: () => {},
   prevDesign: () => {},
   setDesignByIndex: () => {},
+  showCompareView: () => {},
+  hideCompareView: () => {},
 });
 
 
@@ -18,6 +21,7 @@ const AppContextProvider = ({ children }) => {
   const [currentDesignIndex, setCurrentDesignIndex] = useState(0);
   const [currentDesign, setCurrentDesign] = useState(null);
   const [designs, setDesigns] = useState([]);
+  const [isCompareView, setIsCompareView] = useState(false);
   const toggleShowFilters = () => {
     setShowFilters(!showFilters);
   };
@@ -44,16 +48,22 @@ const AppContextProvider = ({ children }) => {
     }
   };
 
+  const showCompareView = () => setIsCompareView(true);
+  const hideCompareView = () => setIsCompareView(false);
+
   const defaultValue = {
     showFilters,
     currentDesignIndex,
     currentDesign,
     designs,
+    isCompareView,
     toggleShowFilters,
     addDesign,
     nextDesign,
     prevDesign,
-    setDesignByIndex
+    setDesignByIndex,
+    showCompareView,
+    hideCompareView
   };
 
   return (

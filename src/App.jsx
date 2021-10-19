@@ -5,6 +5,7 @@ import HomeView from './components/views/Home';
 import DesignView from './components/views/Design';
 
 import './styles/App.css';
+import CompareView from './components/views/Compare';
 
 function App() {
   const {
@@ -13,6 +14,9 @@ function App() {
     currentDesign,
     currentDesignIndex,
     addDesign,
+    isCompareView,
+    showCompareView,
+    hideCompareView,
   } = React.useContext(AppContext);
 
   const onApplyFilters = (newFilters) => {
@@ -23,11 +27,30 @@ function App() {
     toggleShowFilters();
   };
 
+  const onShowCompare = () => {
+    showCompareView();
+  };
+
+  const onCloseCompareView = () => {
+    /* @TODO: Assign the next design index*/
+    hideCompareView();
+  };
+
   return (
       <div className="App relative min-h-screen">
         <Filters onApply={onApplyFilters} />
         {designs && !designs.length && <HomeView onStart={toggleShowFilters} />}
-        {currentDesign && <DesignView design={currentDesign} id={currentDesignIndex + 1} onEdit={onEditDesign} />}
+
+        {currentDesign && !isCompareView && (
+            <DesignView
+                design={currentDesign}
+                id={currentDesignIndex + 1}
+                onEdit={onEditDesign}
+                onShowCompare={onShowCompare}
+            />
+        )}
+
+        {isCompareView && <CompareView onClose={onCloseCompareView} />}
 
       </div>
   );

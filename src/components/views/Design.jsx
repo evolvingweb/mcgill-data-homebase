@@ -13,7 +13,7 @@ import FILTER_CATEGORIES from 'utils/filters.categories';
 import CarbonRating from '../charts/CarbonRating';
 import Summary from '../charts/Summary';
 
-const DesignView = ({ id, design, onEdit }) => {
+const DesignView = ({ id, design, onEdit, onShowCompare }) => {
   const imageAlt = `Design ${id}`;
   const designImageSrc = `https://via.placeholder.com/324x506.png?text=${imageAlt}`;
 
@@ -82,6 +82,12 @@ const DesignView = ({ id, design, onEdit }) => {
     }
   };
 
+  const onShowCompareClick = () => {
+    if (_isFunction(onShowCompare)) {
+      onShowCompare();
+    }
+  };
+
   return (
       <section className={containerClasses}>
         <section className={componentClasses}>
@@ -137,7 +143,7 @@ const DesignView = ({ id, design, onEdit }) => {
             <h2 className={titleClasses}>Design {id}</h2>
 
             <div>
-              <Button icon={DiagonalArrows}>Save & view all metrics</Button>
+              <Button icon={DiagonalArrows} onClick={onShowCompareClick}>Save & view all metrics</Button>
             </div>
             <div className="mt-auto mb-3">
               <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
