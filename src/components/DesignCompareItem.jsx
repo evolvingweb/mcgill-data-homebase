@@ -60,7 +60,7 @@ const DesignCompareItem = ({ id, design, className }) => {
 
                           return (
                               <article className="mt-4" key={title}>
-                                <h4 className="font-semibold text-rain-forest uppercase text-xxs">{title}</h4>
+                                <h4 className="font-semibold text-rain-forest uppercase text-xxs mb-1">{title}</h4>
                                 {
                                   _map(filters, (filter) => {
                                     const filterValue = design[filter] || null;

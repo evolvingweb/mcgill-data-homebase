@@ -37,6 +37,7 @@ const TabItem = ({
     case TabItemType.BUTTON:
       buttonClasses = classNames(
           buttonClasses,
+          'text-sm',
           'py-2',
           'px-4',
           'block',

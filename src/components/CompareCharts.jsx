@@ -1,11 +1,16 @@
 import React, { useEffect, useReducer } from 'react';
+import _map from 'lodash/map';
+
 import TabGroup from './common/TabGroup';
 import { TabItemType } from './common/TabItem';
+
 import Summary from './charts/Summary';
-import _map from 'lodash/map';
 import ElementCategories from './charts/ElementCategories';
+import LifeCycle from './charts/LifeCycle';
+
 import parseSummaryChartData from 'utils/summary-chart.parser';
 import parseElementCategoriesChartData from 'utils/element-catogories-chart.parser';
+import parseLifeCycleChartData from 'utils/life-cycle-chart.parser';
 
 const ChartsActionType = {
   SUMMARY: 'Summary',
@@ -16,6 +21,16 @@ const ChartsActionType = {
 
 const chartReducer = (state, action) => {
   switch (action.type) {
+    case ChartsActionType.LIFE_CYCLE_STAGES:
+      return {
+        ...state,
+        Element: LifeCycle,
+        data: parseLifeCycleChartData(state.designs),
+        elementOptions: {
+          height: 300,
+          className: 'pl-8',
+        }
+      };
     case ChartsActionType.ELEMENT_CATEGORIES:
       return {
         ...state,

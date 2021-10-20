@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import _merge from 'lodash/merge';
+import classNames from 'classnames';
 
 import { CHART_COLORS, MAIN_COLORS } from './config/config';
 import {
@@ -12,6 +13,7 @@ const LifeCycle = ({
   data,
   width = 940,
   height = 240,
+  className,
 }) => {
 
   const parsedData = () => {
@@ -32,8 +34,13 @@ const LifeCycle = ({
     );
   };
 
+  const componentClasses = classNames(
+      'chart-container',
+      className,
+  );
+
   return (
-      <section className="chart-container">
+      <section className={componentClasses}>
         <Bar data={parsedData} options={OPTIONS} width={width} height={height} plugins={[zeroZeroLine, gradientUnderZero]} />
       </section>
   );

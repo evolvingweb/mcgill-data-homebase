@@ -27,7 +27,7 @@ const parseElementCategoriesChartData = (designs) => {
   _each(datasets, ({ label: key, data }) => {
     _each(designs, (design) => {
       const value = design[key] && design[key].replace(',', '');
-      data.splice(1, 0, value); // insert always in the first position in order to see the last first
+      data.splice(1, 0, value); // insert always in the position 1 in order to see the last first
     });
   });
 
