@@ -19,7 +19,7 @@ const CompareView = ({ onClose }) => {
   } = React.useContext(AppContext);
 
   const designsCount = designs.length;
-  const isMaxDesigns = MAX_DESIGNS === (designsCount - 1);
+  const isMaxDesigns = MAX_DESIGNS === designsCount;
   const emptySlotsClass = designsCount === 1 ? 'col-span-2' : 'col-span-1';
   const emptySlotMessage = designsCount === 1 ? 'You can create up to 3 different designs to compare global warming potential metrics.' : 'Differences between your designs are highlighted in green!';
 
@@ -57,11 +57,11 @@ const CompareView = ({ onClose }) => {
         {/* Comparison */}
         <div className={comparisonClasses}>
           <Container>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:place-items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:place-items-center mt-4">
               {
                 _map(designs, (design, index) => {
                   return (
-                      <DesignCompareItem design={design} id={index + 1} />
+                      <DesignCompareItem design={design} id={index + 1} key={index} />
                   );
                 })
               }
@@ -73,8 +73,11 @@ const CompareView = ({ onClose }) => {
                             <ExclamationIcon className="mr-2.5 w-5 h-5 flex-shrink-0 mt-1" />
                             <div>
                               {emptySlotMessage}
-                              <Button type={BUTTON_TYPE.TEXT} onClick={onCloseClick} className="mt-4">Close view and add
-                                design</Button>
+                              <div>
+                                <Button type={BUTTON_TYPE.TEXT} onClick={onCloseClick} className="mt-4">
+                                  Close view and add design
+                                </Button>
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -94,7 +94,13 @@ const DesignView = ({ id, design, onEdit, onShowCompare }) => {
           <div>
             <h3 className="text-black-olive font-bold text-lg">Multi-Family Design Options</h3>
             <div className="mt-7">
-              <Button icon={PencilIcon} onClick={onEditClick} type={BUTTON_TYPE.TEXT} iconPosition={ICON_POSITION.LEFT}>Edit</Button>
+              <Button
+                  icon={PencilIcon}
+                  onClick={onEditClick}
+                  type={BUTTON_TYPE.TEXT}
+                  iconPosition={ICON_POSITION.LEFT}>
+                Edit
+              </Button>
             </div>
             <div className="mt-7">
               {
@@ -131,13 +137,15 @@ const DesignView = ({ id, design, onEdit, onShowCompare }) => {
               }
             </div>
           </div>
-          <div className="col-span-2">
-            <img src={designImageSrc} alt={imageAlt} className="mx-auto" />
-            <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
-              Building Embodied Carbon Rating
-              <ExclamationIcon className="ml-2" />
-            </h3>
-            <CarbonRating value={embodiedCarbonRating} />
+          <div className="col-span-2 flex flex-col">
+            <img src={designImageSrc} alt={imageAlt} className="mx-auto" width={324} height={506} />
+            <div className="mt-auto">
+              <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
+                Building Embodied Carbon Rating
+                <ExclamationIcon className="ml-2" />
+              </h3>
+              <CarbonRating value={embodiedCarbonRating} />
+            </div>
           </div>
           <div className="flex align-start flex-col">
             <h2 className={titleClasses}>Design {id}</h2>

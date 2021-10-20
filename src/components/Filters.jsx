@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import _map from 'lodash/map';
 import _each from 'lodash/each';
+import _first from 'lodash/first';
 
 import { AppContext } from 'context/AppContextProvider';
 import filterRawData from 'mock-data/filters.json';
@@ -65,19 +66,15 @@ const Filters = ({ onApply }) => {
   useEffect(() => {
     if (showFilters) {
       const assignValuesToFilter = {};
+      /* @TODO: Remove this to prevent pre-fill the fields */
+      const preFilledData = currentDesign ? currentDesign : _first(filterRawData);
       _each(filterData, (value, key) => {
-        assignValuesToFilter[key] = (currentDesign && currentDesign[key]) || '';
+        assignValuesToFilter[key] = (preFilledData && preFilledData[key]) || '';
       });
       setCurrentFilter(assignValuesToFilter);
     }
     /* eslint-disable-next-line */
   }, [currentDesign, showFilters]);
-
-  /* @TODO: Remove this */
-  useEffect(() => {
-    onApply(filterRawData[0]);
-    /* eslint-disable-next-line */
-  }, []);
 
   const componentClasses = classNames(
       'fixed',

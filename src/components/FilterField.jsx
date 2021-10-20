@@ -1,5 +1,6 @@
 import React from 'react';
 import _map from 'lodash/map';
+import _first from 'lodash/first';
 import Select, { components } from "react-select";
 
 import _isFunction from 'lodash/isFunction';
@@ -94,6 +95,7 @@ const FilterField = ({
     return null;
   }
   const mergedOptions = _map(options, option => ({ value: option, label: option }));
+  const defaultSelectOption = _first(mergedOptions);
 
   const onSelectChange = (selectedValue, select) => {
     const { value } = selectedValue;
@@ -106,6 +108,7 @@ const FilterField = ({
   return (
       <Select
           options={mergedOptions}
+          defaultValue={defaultSelectOption}
           styles={styles}
           name={defaultOption}
           onChange={onSelectChange}

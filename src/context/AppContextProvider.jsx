@@ -6,15 +6,25 @@ export const AppContext = React.createContext({
   designs: [],
   currentDesign: {},
   isCompareView: false,
-  toggleShowFilters: () => {},
-  nextDesign: () => {},
-  addDesign: () => {},
-  prevDesign: () => {},
-  setDesignByIndex: () => {},
-  showCompareView: () => {},
-  hideCompareView: () => {},
+  toggleShowFilters: () => {
+  },
+  nextDesign: () => {
+  },
+  addDesign: () => {
+  },
+  prevDesign: () => {
+  },
+  setDesignByIndex: () => {
+  },
+  showCompareView: () => {
+  },
+  hideCompareView: () => {
+  },
+  canAddNewDesign: () => {
+  },
 });
 
+const MAX_DESIGNS = 3;
 
 const AppContextProvider = ({ children }) => {
   const [showFilters, setShowFilters] = useState(false);
@@ -26,19 +36,27 @@ const AppContextProvider = ({ children }) => {
     setShowFilters(!showFilters);
   };
 
-  const addDesign = (newDesign) => {
+  const addDesign = (newDesign, setNext = false) => {
     const newDesigns = [...designs];
-    newDesigns.push(newDesign);
+    const newIndex = setNext ? currentDesignIndex + 1 : currentDesignIndex;
+    newDesigns[newIndex] = newDesign;
     setDesigns(newDesigns);
     setCurrentDesign(newDesign);
+    if (setNext) {
+      nextDesign();
+    }
   };
 
   const nextDesign = () => {
-    setCurrentDesignIndex(currentDesignIndex + 1);
+    if (currentDesignIndex < MAX_DESIGNS) {
+      setCurrentDesignIndex(currentDesignIndex + 1);
+    }
   };
 
   const prevDesign = () => {
-    setCurrentDesignIndex(currentDesignIndex - 1);
+    if (currentDesignIndex > 1) {
+      setCurrentDesignIndex(currentDesignIndex - 1);
+    }
   };
 
   const setDesignByIndex = (index) => {
@@ -46,6 +64,10 @@ const AppContextProvider = ({ children }) => {
     if (newDesign) {
       setCurrentDesign(newDesign);
     }
+  };
+
+  const canAddNewDesign = () => {
+    return designs.length < MAX_DESIGNS;
   };
 
   const showCompareView = () => setIsCompareView(true);
@@ -63,7 +85,8 @@ const AppContextProvider = ({ children }) => {
     prevDesign,
     setDesignByIndex,
     showCompareView,
-    hideCompareView
+    hideCompareView,
+    canAddNewDesign,
   };
 
   return (

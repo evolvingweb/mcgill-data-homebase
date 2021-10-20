@@ -12,13 +12,19 @@ const DesignCompareItem = ({ id, design, /*designs, compare, */className }) => {
         <h2 className="font-bold text-black text-2xl">{designTitle}</h2>
         <div className="flex mt-6">
           <div className="flex-shrink-0 pr-6">
-            <img src={designImageSrc} alt={designTitle} className="mx-auto" />
+            <img
+                src={designImageSrc}
+                alt={designTitle}
+                className="mx-auto bg-pale-gray"
+                width={166}
+                height={260}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             {
-              _map(FILTER_CATEGORIES, (columnData) => {
+              _map(FILTER_CATEGORIES, (columnData, index) => {
                 return (
-                    <div>
+                    <div key={index}>
                       {
                         _map(columnData, columnItem => {
                           const { title, filters, disabled = false, } = columnItem;
@@ -37,7 +43,7 @@ const DesignCompareItem = ({ id, design, /*designs, compare, */className }) => {
                                     }
 
                                     return (
-                                        <p key={filter} className="mt-1">
+                                        <p key={filter} className="mt-0">
                                           <span
                                               className="inline-block px-2 py-1 bg-pale-gray rounded-xl text-xxs truncate max-w-full">
                                             {filterValue}

@@ -17,6 +17,7 @@ function App() {
     isCompareView,
     showCompareView,
     hideCompareView,
+    canAddNewDesign,
   } = React.useContext(AppContext);
 
   const onApplyFilters = (newFilters) => {
@@ -32,13 +33,18 @@ function App() {
   };
 
   const onCloseCompareView = () => {
-    /* @TODO: Assign the next design index*/
+    if (canAddNewDesign()) {
+      const newDesign = {...currentDesign};
+      addDesign(newDesign, true);
+      toggleShowFilters();
+    }
     hideCompareView();
   };
 
   return (
       <div className="App relative min-h-screen">
         <Filters onApply={onApplyFilters} />
+
         {designs && !designs.length && <HomeView onStart={toggleShowFilters} />}
 
         {currentDesign && !isCompareView && (
