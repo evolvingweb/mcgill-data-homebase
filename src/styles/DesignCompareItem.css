@@ -1,0 +1,7 @@
+.design-compare-item {
+  &:hover {
+    button {
+      opacity: 1;
+    }
+  }
+}

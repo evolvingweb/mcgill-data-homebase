@@ -1,15 +1,41 @@
 import React from 'react';
 import _map from 'lodash/map';
 
+import { ReactComponent as PencilIcon } from 'images/pencil.svg';
 import FILTER_CATEGORIES from 'utils/filters.categories';
+import Button, { BUTTON_TYPE, ICON_POSITION } from './Button';
+import { AppContext } from 'context/AppContextProvider';
 
-const DesignCompareItem = ({ id, design, /*designs, compare, */className }) => {
+import 'styles/DesignCompareItem.css';
+
+
+const DesignCompareItem = ({ id, design, className }) => {
+  const {
+    setDesignByIndex,
+    toggleShowFilters,
+    hideCompareView,
+  } = React.useContext(AppContext);
   const designTitle = `Design ${id}`;
   const designImageSrc = `https://via.placeholder.com/166x260.png/F00?text=${designTitle}%13Image`;
 
+  const onEditClick = () => {
+    const index = id - 1;
+    setDesignByIndex(index);
+    toggleShowFilters()
+    hideCompareView()
+  };
+
   return (
-      <section className={className}>
-        <h2 className="font-bold text-black text-2xl">{designTitle}</h2>
+      <section className={`design-compare-item ${className ? className : ''}`}>
+        <h2 className="font-bold text-black text-2xl flex items-center title">
+          {designTitle}
+          <Button
+              type={BUTTON_TYPE.TEXT}
+              onClick={onEditClick}
+              icon={PencilIcon}
+              iconPosition={ICON_POSITION.LEFT}
+              className="text-xs ml-4 opacity-0 transition-opacity">Edit</Button>
+        </h2>
         <div className="flex mt-6">
           <div className="flex-shrink-0 pr-6">
             <img

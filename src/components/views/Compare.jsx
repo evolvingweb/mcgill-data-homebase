@@ -61,7 +61,7 @@ const CompareView = ({ onClose }) => {
               {
                 _map(designs, (design, index) => {
                   return (
-                      <DesignCompareItem design={design} id={index + 1} key={index} />
+                      <DesignCompareItem design={design} id={index + 1} key={index} compare={index > 0} />
                   );
                 })
               }

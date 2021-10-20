@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import _map from 'lodash/map';
 import _each from 'lodash/each';
 import _first from 'lodash/first';
@@ -33,12 +33,12 @@ const Filters = ({ onApply }) => {
   } = React.useContext(AppContext);
 
   const filterData = parseFilters(filterRawData);
-  const [currentFilter, setCurrentFilter] = useState({});
+  const [currentFilter, setCurrentFilter] = useState(null);
   const [validFilter, setIsValidFilter] = useState(false);
-  const isFlatRoofType = currentFilter[ROOF_TYPE_KEY] === ROOF_TYPE_VALUE;
+  const isFlatRoofType = currentFilter && currentFilter[ROOF_TYPE_KEY] === ROOF_TYPE_VALUE;
 
   const onFilterFieldChange = (fieldName, value) => {
-    const newCurrentFilter = { ...currentFilter, [fieldName]: value };
+    const newCurrentFilter = { ...(currentFilter ? currentFilter : {}), [fieldName]: value };
 
     /* remove Slight options*/
     if (fieldName === ROOF_TYPE_KEY) {
@@ -63,7 +63,7 @@ const Filters = ({ onApply }) => {
     /* eslint-disable-next-line */
   }, [currentFilter, setIsValidFilter]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (showFilters) {
       const assignValuesToFilter = {};
       /* @TODO: Remove this to prevent pre-fill the fields */
@@ -96,6 +96,10 @@ const Filters = ({ onApply }) => {
       },
   );
 
+  if (!currentFilter) {
+    return null;
+  }
+
   return (
       <section className={componentClasses}>
         <Container className="relative max-h-full relative">
@@ -123,6 +127,7 @@ const Filters = ({ onApply }) => {
                                   {
                                     _map(filters, filter => {
                                       const filterItemData = filterData[filter] || [];
+                                      const defaultValue = currentFilter && currentFilter[filter];
                                       /* Remove ROOF_FLAT_EXCLUDED_FIELDS when the filter is Roof Type*/
                                       if (isFlatRoofType && ROOF_FLAT_EXCLUDED_FIELDS.includes(filter)) {
                                         return null;
@@ -134,6 +139,7 @@ const Filters = ({ onApply }) => {
                                           <FilterField
                                               options={filterItemData}
                                               defaultOption={filter}
+                                              defaultValue={defaultValue}
                                               key={filter}
                                               onChange={onFilterFieldChange} />
                                       );

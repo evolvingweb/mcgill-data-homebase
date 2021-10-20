@@ -6,7 +6,6 @@ import _isFunction from 'lodash/isFunction';
 import Button, { BUTTON_TYPE, ICON_POSITION } from '../Button';
 
 import { ReactComponent as PencilIcon } from 'images/pencil.svg';
-import { ReactComponent as ExclamationIcon } from 'images/exclamation-mark.svg';
 import { ReactComponent as DiagonalArrows } from 'images/diagonal-arrows.svg';
 
 import FILTER_CATEGORIES from 'utils/filters.categories';
@@ -142,7 +141,6 @@ const DesignView = ({ id, design, onEdit, onShowCompare }) => {
             <div className="mt-auto">
               <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
                 Building Embodied Carbon Rating
-                <ExclamationIcon className="ml-2" />
               </h3>
               <CarbonRating value={embodiedCarbonRating} />
             </div>
@@ -156,7 +154,6 @@ const DesignView = ({ id, design, onEdit, onShowCompare }) => {
             <div className="mt-auto mb-3">
               <h3 className="uppercase font-semibold mt-7 mb-4 flex align-center">
                 Sum of Embodied Carbon
-                <ExclamationIcon className="ml-2" />
               </h3>
               <p className="text-2xl font-normal">
                 {sumEmbodiedCarbonParts[0]}

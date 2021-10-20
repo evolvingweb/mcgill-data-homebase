@@ -1,6 +1,7 @@
 import React from 'react';
 import _map from 'lodash/map';
 import _first from 'lodash/first';
+import _find from 'lodash/find';
 import Select, { components } from "react-select";
 
 import _isFunction from 'lodash/isFunction';
@@ -58,10 +59,10 @@ const styles = {
     fontSize: 14,
     color: '#3F3F37',
     backgroundColor: state.isFocused
-      ? '#C1E8C3'
-      : state.isFocused
         ? '#C1E8C3'
-        : '#FFF',
+        : state.isFocused
+            ? '#C1E8C3'
+            : '#FFF',
     ':active': {
       ...styles[':active'],
       backgroundColor: !state.isDisabled
@@ -90,12 +91,13 @@ const FilterField = ({
                        defaultOption,
                        options = [],
                        onChange,
+                       defaultValue,
                      }) => {
   if (!options.length) {
     return null;
   }
   const mergedOptions = _map(options, option => ({ value: option, label: option }));
-  const defaultSelectOption = _first(mergedOptions);
+  const defaultSelectOption = _find(mergedOptions, option => option.value === defaultValue) || _first(mergedOptions)
 
   const onSelectChange = (selectedValue, select) => {
     const { value } = selectedValue;
@@ -108,7 +110,7 @@ const FilterField = ({
   return (
       <Select
           options={mergedOptions}
-          defaultValue={defaultSelectOption}
+          value={defaultSelectOption}
           styles={styles}
           name={defaultOption}
           onChange={onSelectChange}

@@ -63,6 +63,7 @@ const AppContextProvider = ({ children }) => {
     const newDesign = designs[index] || null;
     if (newDesign) {
       setCurrentDesign(newDesign);
+      setCurrentDesignIndex(index);
     }
   };
 
