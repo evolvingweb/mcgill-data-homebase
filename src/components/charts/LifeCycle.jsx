@@ -40,7 +40,7 @@ const LifeCycle = ({
   );
 
   return (
-      <section className={componentClasses}>
+      <section className={componentClasses} style={{ width: width, height: height }}>
         <Bar data={parsedData} options={OPTIONS} width={width} height={height} plugins={[zeroZeroLine, gradientUnderZero]} />
       </section>
   );

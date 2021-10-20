@@ -21,12 +21,25 @@ const ChartsActionType = {
 
 const chartReducer = (state, action) => {
   switch (action.type) {
+    case ChartsActionType.DIVISIONS:
+      return {
+        ...state,
+        Element: LifeCycle,
+        data: parseLifeCycleChartData(state.designs, true),
+        elementOptions: {
+          width: '100%',
+          height: 360,
+          className: 'pl-8',
+        },
+        ts: new Date().getTime(),
+      };
     case ChartsActionType.LIFE_CYCLE_STAGES:
       return {
         ...state,
         Element: LifeCycle,
         data: parseLifeCycleChartData(state.designs),
         elementOptions: {
+          width: '100%',
           height: 300,
           className: 'pl-8',
         }
