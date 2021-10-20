@@ -7,7 +7,7 @@ const VALID_FILTERS = [
   'Roof type',
   'Roof Material',
   'Basement',
-  'Structure',
+  'Structure Type',
   'Foundation',
   'Wall Facade Material',
   'Interior Wall Material',

@@ -30,7 +30,7 @@ const ElementCategories = ({
   };
 
   return (
-      <section className="chart-container">
+      <section className="chart-container elements-categories">
         <Bar data={parsedData} options={OPTIONS} width={width} height={height} />
       </section>
   );

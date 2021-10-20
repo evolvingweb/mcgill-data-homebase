@@ -10,6 +10,7 @@ import { ReactComponent as ExclamationIcon } from 'images/exclamation-mark.svg';
 import { AppContext } from 'context/AppContextProvider';
 import DesignCompareItem from '../DesignCompareItem';
 import Container from '../common/Container';
+import CompareCharts from '../CompareCharts';
 
 const MAX_DESIGNS = 3;
 
@@ -91,7 +92,7 @@ const CompareView = ({ onClose }) => {
         {/* Charts */}
         <div className={chartsClasses}>
           <Container>
-            Charts will live here
+            <CompareCharts designs={designs} title="Embodied Carbon" />
           </Container>
         </div>
         {/* End Charts */}

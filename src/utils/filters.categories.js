@@ -13,7 +13,7 @@ const FILTER_CATEGORIES = [
       title: 'Structure',
       filters: [
         'Basement',
-        'Structure',
+        'Structure Type',
         'Foundation',
       ],
     },

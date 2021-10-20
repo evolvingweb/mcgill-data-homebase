@@ -48,7 +48,7 @@ const Summary = ({
   };
 
   return (
-      <section className="chart-container">
+      <section className="chart-container summary-chart" style={{ width: width }}>
         <Bar data={parsedData} options={mergedOptions} width={width} height={height} />
       </section>
   );

@@ -12,9 +12,9 @@ export const OPTIONS = extendConfig({
   plugins: {
     legend: {
       display: true,
-      position: 'bottom',
+      position: 'right',
       align: 'start',
-      fullSize: false,
+      fullSize: true,
     },
   },
 });
