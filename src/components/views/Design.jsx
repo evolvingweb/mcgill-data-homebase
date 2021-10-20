@@ -167,9 +167,6 @@ const DesignView = ({ id, design, onEdit, onShowCompare }) => {
             </div>
           </div>
         </section>
-        <pre className="w-full h-56 overflow-visible whitespace-pre-wrap text-xs">
-          {JSON.stringify(design)}
-        </pre>
       </section>
   );
 };

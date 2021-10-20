@@ -96,9 +96,6 @@ const CompareView = ({ onClose }) => {
           </Container>
         </div>
         {/* End Charts */}
-        <pre className="w-full h-56 overflow-visible whitespace-pre-wrap text-xs">
-          {JSON.stringify(designs)}
-        </pre>
       </>
   );
 };
