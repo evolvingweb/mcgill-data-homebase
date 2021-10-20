@@ -2,6 +2,7 @@ import React from 'react';
 import _map from 'lodash/map';
 
 import { ReactComponent as PencilIcon } from 'images/pencil.svg';
+import useImage from 'hooks/useImage';
 import FILTER_CATEGORIES from 'utils/filters.categories';
 import Button, { BUTTON_TYPE, ICON_POSITION } from './Button';
 import { AppContext } from 'context/AppContextProvider';
@@ -16,7 +17,7 @@ const DesignCompareItem = ({ id, design, className }) => {
     hideCompareView,
   } = React.useContext(AppContext);
   const designTitle = `Design ${id}`;
-  const designImageSrc = `https://via.placeholder.com/166x260.png/F00?text=${designTitle}%13Image`;
+  const { imageUrl } = useImage(id); // @TODO change id for Option Number
 
   const onEditClick = () => {
     const index = id - 1;
@@ -39,7 +40,7 @@ const DesignCompareItem = ({ id, design, className }) => {
         <div className="flex mt-6">
           <div className="flex-shrink-0 pr-6">
             <img
-                src={designImageSrc}
+                src={imageUrl}
                 alt={designTitle}
                 className="mx-auto bg-pale-gray"
                 width={166}
